@@ -5,8 +5,14 @@
     },
     "routes": [
       {
-        "src": "/public/(.*)",
-        "dest": "/public/index.php"
+        "src": "/api/(.*)",
+        "dest": "/api/index.php"
+      }
+    ],
+    "builds": [
+      {
+        "src": "public/index.php",
+        "use": "@vercel/php"
       }
     ],
     "env": {
