@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "public": "public",
+    "public": true,
     "routes": [
       { "src": "/public/index.php", "dest": "/public/index.php" },
       { "src": "/js/(.*)", "dest": "/public/js/$1" },
@@ -9,3 +9,4 @@
       { "src": "/(.*)", "dest": "/public/index.php" }
     ]
   }
+
