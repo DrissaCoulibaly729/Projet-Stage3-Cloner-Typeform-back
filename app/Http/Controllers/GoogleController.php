@@ -19,7 +19,7 @@ class GoogleController extends Controller
     {
         try {
             $user = Socialite::driver('google')->user();
-            dd($user);
+            //dd($user);
             //check user email if already there
             $is_user = User::where('email',$user->getEmail())->first();
             if(!$is_user){
@@ -39,7 +39,7 @@ class GoogleController extends Controller
                 $saveUser = User::where('email',$user->getEmail())->first();
             }
             Auth::loginUsingId($saveUser->id);
-            return redirect()->route('home');
+            return redirect()->route('/');
         } catch (\Throwable $th) {
             Log::error('Google callback error: ' . $th->getMessage());
             return response()->json(['error' => 'Internal Server Error'], 500);
