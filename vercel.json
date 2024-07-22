@@ -9,6 +9,3 @@
       { "src": "/(.*)", "dest": "/public/index.php" }
     ]
   }
-
-
-
