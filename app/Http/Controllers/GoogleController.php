@@ -19,7 +19,7 @@ class GoogleController extends Controller
     {
         try {
             $user = Socialite::driver('google')->user();
-            //dd($user);
+            dd($user);
             //check user email if already there
             $is_user = User::where('email',$user->getEmail())->first();
             if(!$is_user){
