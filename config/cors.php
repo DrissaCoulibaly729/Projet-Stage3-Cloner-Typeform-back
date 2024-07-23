@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['https://clone-typeform.netlify.app/','http://localhost:3000','https://accounts.google.com'],
 
     'allowed_origins_patterns' => [],
 

@@ -11,20 +11,24 @@ class Cors
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
      */
     public function handle(Request $request, Closure $next)
-{
-    $response = $next($request);
+    {
+        $response = $next($request);
 
-    // Ensure $response is a Response instance
-    if (!$response instanceof Response) {
-        $response = new Response($response);
+        // Ensure $response is a Response instance
+        if (!$response instanceof Response) {
+            $response = response($response);
+        }
+
+        // Handle CORS
+        return $response
+            ->header('Access-Control-Allow-Origin', 'https://accounts.google.com, https://clone-typeform.netlify.app, https://play.google.com, http://localhost:3000')
+            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+            ->header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization, X-Requested-With, Application')
+            ->header('Access-Control-Allow-Credentials', 'true');
     }
-
-    return $response
-        ->header('Access-Control-Allow-Origin', '*')
-        ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-        ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-}
 }
