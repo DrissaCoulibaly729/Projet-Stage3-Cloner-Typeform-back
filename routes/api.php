@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ReponseController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\WorkspaceController;
 use App\Http\Controllers\GoogleAuthController;
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,14 @@ Route::middleware('cors')->group(function () {
         Route::post('forms', [FormController::class, 'createForm']);
         Route::put('forms/{id}', [FormController::class, 'updateForm']);
         Route::delete('forms/{id}', [FormController::class, 'deleteForm']);
+
+         // Routes pour Workspace
+         Route::get('workspaces', [WorkspaceController::class, 'getAllWorkspaces']);
+         Route::get('workspaces/{id}', [WorkspaceController::class, 'getWorkspaceById']);
+         Route::post('workspaces', [WorkspaceController::class, 'createWorkspace']);
+         Route::put('workspaces/{id}', [WorkspaceController::class, 'updateWorkspace']);
+         Route::delete('workspaces/{id}', [WorkspaceController::class, 'deleteWorkspace']);
+         Route::get('/workspaces/{userId}', [WorkspaceController::class, 'getWorkspacesByUserId']);
 
         // Routes pour Question
         Route::get('questions', [QuestionController::class, 'getAllQuestions']);

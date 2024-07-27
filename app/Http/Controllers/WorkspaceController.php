@@ -14,12 +14,29 @@ class WorkspaceController extends Controller
     }
 
 
-        public function createWorkspace(Request $request)
-        {
-            $workspace = Workspace::create($request->all());
-            return response()->json($workspace, 201);
-        }
+    public function createWorkspace(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'user_id' => 'required|exists:users,id', // Validation pour user_id
+        ]);
+    
+        $workspace = Workspace::create([
+            'name' => $request->input('name'),
+            'user_id' => $request->input('user_id'),
+        ]);
+    
+        return response()->json($workspace, 201);
+    }
+    
+    public function getWorkspacesByUserId($userId)
+    {
+        // Rechercher les workspaces par user_id
+        $workspaces = Workspace::where('user_id', $userId)->get();
 
+        // Retourner les workspaces en réponse JSON
+        return response()->json($workspaces);
+    }
         public function getWorkspaceById($id)
         {
             $workspace = Workspace::findOrFail($id);
