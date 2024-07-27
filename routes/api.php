@@ -20,8 +20,13 @@ use App\Http\Controllers\GoogleAuthController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
 Route::middleware('cors')->group(function () {
     Route::prefix('v1')->group(function () {
+        // Route pour obtenir l'utilisateur authentifié
+        Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+            return $request->user();
+        });
         // Routes pour User
         Route::get('users', [UserController::class, 'getAllUsers']);
         Route::get('users/{id}', [UserController::class, 'getUserById']);
@@ -65,9 +70,4 @@ Route::middleware('cors')->group(function () {
         Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
         Route::post('google-auth', [GoogleAuthController::class, 'handleGoogleAuth'])->name('auth');
     });
-});
-
-// Route pour obtenir l'utilisateur authentifié
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
 });
