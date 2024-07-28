@@ -41,6 +41,7 @@ Route::middleware('cors')->group(function () {
         Route::post('forms', [FormController::class, 'createForm']);
         Route::put('forms/{id}', [FormController::class, 'updateForm']);
         Route::delete('forms/{id}', [FormController::class, 'deleteForm']);
+        Route::get('/workspace/{workspaceId}/forms', [FormController::class, 'getFormsByWorkspaceId']);
 
          // Routes pour Workspace
          Route::get('workspaces', [WorkspaceController::class, 'getAllWorkspaces']);
@@ -48,7 +49,7 @@ Route::middleware('cors')->group(function () {
          Route::post('workspaces', [WorkspaceController::class, 'createWorkspace']);
          Route::put('workspaces/{id}', [WorkspaceController::class, 'updateWorkspace']);
          Route::delete('workspaces/{id}', [WorkspaceController::class, 'deleteWorkspace']);
-         Route::get('/workspaces/{userId}', [WorkspaceController::class, 'getWorkspacesByUserId']);
+         Route::get('/workspaces/{userId}/users', [WorkspaceController::class, 'getWorkspacesByUserId']);
 
         // Routes pour Question
         Route::get('questions', [QuestionController::class, 'getAllQuestions']);

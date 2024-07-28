@@ -37,4 +37,15 @@ class FormController extends Controller
         Form::destroy($id);
         return response()->json(null, 204);
     }
+
+    public function getFormsByWorkspaceId($workspaceId)
+    {
+        try {
+            $forms = Form::where('workspace_id', $workspaceId)->get();
+            return response()->json($forms, 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error retrieving forms: ' . $e->getMessage()], 500);
+        }
+    }
+
 }
